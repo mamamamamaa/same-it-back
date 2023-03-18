@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+  db_same_it:
+    container_name: db_same_it
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    image: postgres:15.2-alpine
