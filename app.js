@@ -11,22 +11,23 @@ app.use(cors());
 app.use(express.json());
 
 async function main() {
-  const newUser = await prisma.user.create({
+  const newProfile = await prisma.profile.create({
     data: {
-      username: "john_doe",
-      email: "john_doe@example.com",
-      role: "employee",
+      firstName: "galava",
+      secondName: "2 uha",
+      state: "male",
+      user: await prisma.user.create({
+        data: {
+          username: "john_doe",
+          email: "john_doeee@example.com",
+          role: "employee",
+        },
+      }),
     },
   });
-  console.log(newUser);
+  console.log(newProfile);
 }
 
-main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main();
 
 module.exports = app;
