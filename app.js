@@ -10,24 +10,13 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
-async function main() {
-  const newProfile = await prisma.profile.create({
-    data: {
-      firstName: "galava",
-      secondName: "2 uha",
-      state: "male",
-      user: await prisma.user.create({
-        data: {
-          username: "john_doe",
-          email: "john_doeee@example.com",
-          role: "employee",
-        },
-      }),
-    },
-  });
-  console.log(newProfile);
-}
+app.use((req, res) => {
+  res.status(404).json({ message: "Not found" });
+});
 
-main();
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
+});
 
 module.exports = app;
