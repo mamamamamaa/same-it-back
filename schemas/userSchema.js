@@ -9,4 +9,13 @@ const userSchema = Joi.object({
   state: Joi.string().valid("male", "female").required(),
 });
 
-module.exports = userSchema;
+const updateUserSchema = Joi.object({
+  username: Joi.string(),
+  firstName: Joi.string(),
+  lastName: Joi.string(),
+  email: Joi.string().email(),
+  role: Joi.string().valid("admin", "employee"),
+  state: Joi.string().valid("male", "female"),
+});
+
+module.exports = { userSchema, updateUserSchema };

@@ -1,12 +1,14 @@
 const express = require("express");
 
-const userSchema = require("../schemas/userSchema");
+const { userSchema, updateUserSchema } = require("../schemas/userSchema");
 const validateBody = require("../middlewares/validateBody");
-const { getUsers, addUser } = require("../controllers/users");
+const ctrl = require("../controllers/users");
 
 const router = express.Router();
 
-router.get("/", getUsers);
-router.post("/", validateBody(userSchema), addUser);
+router.get("/", ctrl.getUsers);
+router.post("/", validateBody(userSchema), ctrl.addUser);
+router.put("/:id", validateBody(updateUserSchema), ctrl.updateUser);
+router.delete("/:id", ctrl.deleteUser);
 
 module.exports = router;
