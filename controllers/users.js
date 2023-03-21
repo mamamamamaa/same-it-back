@@ -3,10 +3,13 @@ const ctrlWallpaper = require("../helpers/ctrlWallpaper");
 
 const prisma = new PrismaClient();
 
-const getAll = async (req, res, next) => {
-  const { profiles = false, role } = req.query;
+const getAll = async (req, res) => {
+  const { profiles = false, role, page = 1, take = 10 } = req.query;
+  const skip = (page - 1) * take;
 
   const data = await prisma.user.findMany({
+    skip,
+    take,
     where: {
       role: role,
     },
