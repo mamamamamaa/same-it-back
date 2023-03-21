@@ -4,26 +4,44 @@ const ctrlWallpaper = require("../helpers/ctrlWallpaper");
 const prisma = new PrismaClient();
 
 const getUsers = async (req, res) => {
-  const { profiles = false, role, page = 1, take = 10 } = req.query;
+  const { profile = false, role, state, page = 1, take = 10 } = req.query;
   const skip = (page - 1) * take;
 
   const data = await prisma.user.findMany({
     skip,
     take,
     where: {
-      role: role,
+      role,
+      profile: {
+        state,
+      },
     },
     include: {
-      profile: profiles,
+      profile,
     },
   });
   res.status(200).json({ data });
 };
 
 const addUser = async (req, res) => {
+  const { username, email, role, firstName, lastName, state } = req.body;
+
   const newUser = await prisma.user.create({
-    data: {},
+    data: {
+      username,
+      email,
+      role,
+      profile: {
+        create: {
+          firstName,
+          lastName,
+          state,
+        },
+      },
+    },
   });
+
+  res.status(201).json(newUser);
 };
 
 module.exports = {
