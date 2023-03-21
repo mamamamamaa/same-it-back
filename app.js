@@ -2,14 +2,15 @@ require("dotenv").config();
 
 const cors = require("cors");
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
 
 const app = express();
-const prisma = new PrismaClient();
+
+const usersRouter = require("./routes/users");
 
 app.use(cors());
 app.use(express.json());
 
+app.use("/users", usersRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
