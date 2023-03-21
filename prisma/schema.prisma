@@ -26,7 +26,7 @@ model User {
   email      String     @unique
   role       userRoles?
   dateCreate DateTime   @default(now())
-  profile    Profile?   @relation(fields: [profileId], references: [id])
+  profile    Profile?   @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId  Int?       @unique
 }
 
