@@ -48,6 +48,12 @@ docker-compose up -d
 npx prisma migrate dev --name init
 ```
 
+* For ease of use and improvement of the application, generate `@prisma/client`:
+
+```
+npx prisma generate
+```
+
 * Run application:
 ```
 // with npm
