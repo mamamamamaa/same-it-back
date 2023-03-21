@@ -1,6 +1,6 @@
-# Test task
+# Test task №2
 
-Test task in the SAME IT company Same for the position of JUNIOR JAVASCRIPT DEVELOPER.
+Second test task in the SAME IT company Same for the position of JUNIOR JAVASCRIPT DEVELOPER.
 
 ## Usage
 
